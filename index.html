@@ -53,8 +53,9 @@
       .spotify-iframe {
         position: relative;
         max-width: 80%;
-        height: 400px; /* Matches iframe height */
         margin: auto;
+        padding-top: 25%; /* Adjust to match aspect ratio of Spotify player */
+        overflow: hidden;
       }
 
       .spotify-iframe iframe {
@@ -62,7 +63,14 @@
         top: 0;
         left: 0;
         width: 100%;
-        height: 100%;
+        height: 400%;
+      }
+
+      @media (max-width: 768px) {
+        /* Change this to your preferred mobile breakpoint */
+        .spotify-iframe {
+          max-width: 100%;
+        }
       }
 
       .section {
