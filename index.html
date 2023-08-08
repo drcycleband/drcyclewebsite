@@ -7,13 +7,13 @@
         height: 100%;
         margin: 0;
         font-family: Arial, sans-serif;
+        overflow: auto; /* Enable scrolling */
       }
 
       .background {
         position: relative;
-        background-position: center;
-        background-size: cover;
-        height: 50%;
+        width: 100%;
+        height: 100vh; /* Full viewport height */
         overflow: hidden;
       }
 
@@ -29,38 +29,96 @@
 
       .background video {
         position: absolute;
-        top: 0;
-        right: 0;
-        bottom: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
+        top: 50%;
+        left: 50%;
+        min-width: 100%;
+        min-height: 100%;
+        width: auto;
+        height: auto;
+        transform: translate(-50%, -50%);
         object-fit: cover;
       }
 
-      .content {
+      .background h1 {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        color: white;
+        text-align: center;
+        font-size: 3em;
+        z-index: 1;
+      }
+
+      .section {
         padding: 20px;
         color: white;
         background-color: black;
+      }
+
+      .section:nth-child(even) {
+        background-color: #333;
       }
     </style>
   </head>
   <body>
     <div class="background">
+      <h1>DR CYCLE</h1>
       <video
+        id="background-video"
         playsinline="playsinline"
         autoplay="autoplay"
         muted="muted"
         loop="loop"
       >
-        <source src="path_to_your_video.mp4" type="video/mp4" />
+        <source src="Media/backgroundvideo_H.264.mp4" type="video/mp4" />
       </video>
     </div>
 
-    <div class="content">
-      <h1>Welcome to our band's website!</h1>
+    <div class="section">
       <p>Here is some more information about our band...</p>
-      <!-- Add more content here -->
     </div>
+
+    <div class="section">
+      <h2>Our Music</h2>
+      <p>Listen to our latest tracks...</p>
+      <!-- Replace this with actual music player or links -->
+    </div>
+
+    <div class="section">
+      <h2>Upcoming Shows</h2>
+      <p>Find out when and where we're playing next...</p>
+      <!-- Replace this with actual show information -->
+    </div>
+
+    <div class="section">
+      <h2>Contact Us</h2>
+      <p>Get in touch with us...</p>
+      <!-- Replace this with actual contact information -->
+    </div>
+
+    <script>
+      var video = document.getElementById("background-video");
+
+      video.addEventListener(
+        "ended",
+        function () {
+          this.currentTime = 0;
+          this.playbackRate = -1;
+          this.play();
+        },
+        false
+      );
+
+      video.addEventListener(
+        "timeupdate",
+        function () {
+          if (this.currentTime <= 0) {
+            this.playbackRate = 1;
+          }
+        },
+        false
+      );
+    </script>
   </body>
 </html>
